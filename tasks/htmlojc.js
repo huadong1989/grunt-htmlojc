@@ -66,7 +66,8 @@ module.exports = function(grunt) {
               //Compressor css code
               var cssMinify = new CleanCSS({advanced:true});
               var min = cssMinify.minify(code);
-              opCode = min.styles+"\n";
+              var minCode = cssMinify.minify(min)
+              opCode = minCode+"\n";
           }
          
           allScript.push(opCode);
@@ -82,9 +83,16 @@ module.exports = function(grunt) {
       var mFileMap = mapJson[fileName];
       var absoluteFilePath = options.rootPath+"/"+options.dest+"/"+type+"/";
 
-      options.domain = options.domain!=""?(options.domain.lastIndexOf("/")==0?options.domain:options.domain+"/"):"";
+      var domain = options.domain;
+      domain = options.domain!=""?(options.domain.lastIndexOf("/")==0?options.domain:options.domain+"/"):"";
 
-      var replaceStr = '<script src="'+options.domain+options.dest+'/'+type+'/'+fileName+'"></scrpt>';
+      var replaceStr = "";
+      if(type=="js"){
+        replaceStr  = '<script src="'+domain+options.dest+'/'+type+'/'+fileName+'"></scrpt>';
+      }else{
+        replaceStr = '<link href="'+domain+options.dest+'/'+type+'/'+fileName+'" rel="stylesheet" type="text/css"/>';
+      }
+       
       if(typeof mFileMap != 'undefined'){
           if(mFileMap.md5 && mFileMap.md5 == codeMd5){
               return replaceStr;
@@ -151,7 +159,7 @@ module.exports = function(grunt) {
               return handlerCode(mapJson,options,m1,"css");
         });
 
-        grunt.file.write(filepath,data);
+        //grunt.file.write(filepath,data);
         return ;
       });
     });
