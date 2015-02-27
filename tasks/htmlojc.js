@@ -90,6 +90,12 @@ module.exports = function(grunt) {
           }
        }
        mapJson[fileName] = {md5:codeMd5};
+       if(options.banner!=''){
+          finalCode = options.banner+"\n"+finalCode;
+       }
+       if(options.footer!=''){
+          finalCode = finalCode+"\n"+options.footer;
+       }
        grunt.file.write(absoluteFilePath+fileName, finalCode);
 
        grunt.log.debug(replaceStr);
