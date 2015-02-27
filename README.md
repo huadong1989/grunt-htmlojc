@@ -5,9 +5,8 @@
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
 
-> 本插件需要node和grunt环境
-> >node安装环境参考node [官网](http://nodejs.org/)（http://nodejs.org/）
-> >grunt安装环境参考grunt [官网](http://www.gruntjs.net/)（http://www.gruntjs.net/）
+* 本插件需要node和grunt环境  node安装环境参考node [官网](http://nodejs.org/)（http://nodejs.org/）
+* grunt安装环境参考grunt [官网](http://www.gruntjs.net/)（http://www.gruntjs.net/）
 
 ```shell
 npm install grunt-htmlojc --save-dev
@@ -63,13 +62,13 @@ Type: `String`
 Default value: `''`
 
 工作目录，相对于Gruntfile.js文件，例如：
-> project
-> > src
-> > >webapp
-> > > >resource
-> > > >WEB-INFO
-> > > > >...
-> > Gruntfile.js
+project  
+-src  
+--webapp  
+---resource  
+---WEB-INFO  
+----...  
+-Gruntfile.js  
 此时rootPath为src/webapp
 
 #### options.dest
