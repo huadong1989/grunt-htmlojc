@@ -48,6 +48,7 @@ module.exports = function(grunt) {
         var script = srcArr[i];
         script.match(scrptRegExp);
         var file = RegExp.$1,absolutePath = '';
+        options.rootPath = options.rootPath == ""?".":options.rootPath;
         if(file.indexOf("/")==0){
             absolutePath = options.rootPath+file;
         }else{
