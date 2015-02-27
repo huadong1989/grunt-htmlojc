@@ -1,6 +1,6 @@
 /*
  * grunt-htmlojc
- * https://github.com/huadong1989/grunt-ojc
+ * https://github.com/huadong1989/grunt-htmlojc
  *
  * Copyright (c) 2015 hadon
  * Licensed under the MIT license.
@@ -22,29 +22,19 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc'
       }
     },
-
-    // Before generating any new files, remove any previously-created files.
-    clean: {
-      tests: ['tmp']
-    },
-
     // Configuration to be run (and then tested).
     htmlojc: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
+       main:{
+         options: {
+            domain:'',
+            rootPath:'example',
+            dest:'statics/release'
+         },
+         files: [
+            {
+              src:'example/**/*.html'
+            }
+          ]
       }
     },
 
@@ -65,9 +55,9 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'htmlojc', 'nodeunit']);
+  grunt.registerTask('test', ['htmlojc:main']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['test']);
 
 };

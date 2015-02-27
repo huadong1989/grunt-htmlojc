@@ -1,17 +1,19 @@
 # grunt-htmlojc
 
-> compression html's js and css script
+> 优化html的js和css脚本，此工具的原理是合并html文件中的指定需要合并的文件并替换合并后的文件，新生成的文件以内容md5码进行命令，这样是为了控制浏览器加载文件的缓存，例子见example文件夹
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
 
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+> 本插件需要node和grunt环境
+> >node安装环境参考node [官网](http://nodejs.org/)（http://nodejs.org/）
+> >grunt安装环境参考grunt [官网](http://www.gruntjs.net/)（http://www.gruntjs.net/）
 
 ```shell
 npm install grunt-htmlojc --save-dev
 ```
 
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+安装好插件之后需要在您的 Gruntfile 文件中如下方式引用插件:
 
 ```js
 grunt.loadNpmTasks('grunt-htmlojc');
@@ -37,53 +39,83 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.banner
 Type: `String`
-Default value: `',  '`
+Default value: `''`
 
-A string value that is used to do something with whatever.
+优化后的文件开始注释
 
-#### options.punctuation
+#### options.footer
 Type: `String`
-Default value: `'.'`
+Default value: `''`
 
-A string value that is used to do something else with whatever else.
+优化后的文件结尾注释
+
+
+#### options.domain
+Type: `String`
+Default value: `''`
+
+是上线后脚本的静态资源（CDN地址），默认为空.
+
+#### options.rootPath
+Type: `String`
+Default value: `''`
+
+工作目录，相对于Gruntfile.js文件，例如：
+> project
+> > src
+> > >webapp
+> > > >resource
+> > > >WEB-INFO
+> > > > >...
+> > Gruntfile.js
+此时rootPath为src/webapp
+
+#### options.dest
+Type: `String`
+Default value: `'statics'`
+
+优化后保存的文件目录，此目录是相对于rootPath的
 
 ### Usage Examples
-
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+```html
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<!--{{{-->
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<!--}}}-->
+</head>
+<body>
+这里是测试
+<!--{{{-->
+<script src="js/common.js" ></script>
+<script src="css/index.js" ></script>
+<!--}}}-->
+</body>
+```
 
 ```js
 grunt.initConfig({
   htmlojc: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+     options: {
+          domain:'',
+          rootPath:'example',
+          dest:'statics/release'
+       },
+       main:{
+          files: [
+            {
+              src:'example/**/*.html'
+            }
+          ]
+      }
   },
 });
 ```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  htmlojc: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 _(Nothing yet)_
