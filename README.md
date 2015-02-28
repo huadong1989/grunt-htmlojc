@@ -1,6 +1,6 @@
 # grunt-htmlojc
 
-> 优化html的js和css脚本，此工具的原理是合并html文件中的指定需要合并的文件并替换合并后的文件，新生成的文件以内容md5码进行命令，这样是为了控制浏览器加载文件的缓存，例子见example文件夹
+> 优化html的js和css脚本，此工具的原理是合并html文件中的指定需要合并的文件并替换合并后的文件，新生成的文件以内容md5码进行命名，如果合并之后的内容发生变化，则文件名同样会发生变化，这样是为了控制浏览器加载文件的缓存，例子见example文件夹
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
